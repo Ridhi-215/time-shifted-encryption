@@ -1,0 +1,656 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{tocloft}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning, arrows.meta}
+\usepackage{xcolor}
+
+\lstdefinelanguage{JavaScript}{
+    keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var, void, while, with, let, const},
+    keywordstyle=\color{blue}\bfseries,
+    ndkeywords={class, export, boolean, throw, implements, import, this},
+    ndkeywordstyle=\color{darkgray}\bfseries,
+    identifierstyle=\color{black},
+    sensitive=false,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{gray}\ttfamily,
+    stringstyle=\color{red}\ttfamily,
+    morestring=[b]',
+    morestring=[b]"
+}
+
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection.}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection.}{1em}{}
+
+\setlength{\cftbeforesecskip}{5pt}
+\setlength{\cftbeforesubsecskip}{2pt}
+
+\begin{document}
+
+% ---------- Title Page ----------
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    {\Huge \textbf{TIME-SHIFTED ENCRYPTION \\[0.3cm] WEB PLATFORM}}\\[0.5cm]
+    {\Large \textbf{A Secure System for Time-Locked File Access}}\\[2cm]
+    
+    {\large \textbf{Submitted by:}}\\[0.2cm]
+    \textbf{Guntur Ridhi}\\
+    Registration Number: \textbf{AP22110011467}\\
+    B.Tech, Computer Science and Engineering\\[1cm]
+    
+    \textbf{Under the guidance of:}\\[0.2cm]
+    \textbf{Dr. Sazzad Ali Biswas}\\
+    Assistant Professor\\
+    Department of Mathematics\\[1cm]
+    
+    \textbf{Semester: Jan – Apr 2025}
+    
+    \vfill
+    
+    \includegraphics[width=4cm]{srm_logo.png}\\[0.5cm]
+    {\Large \textbf{SRM University, Andhra Pradesh}}\\[0.2cm]
+    \textit{Department of Computer Science and Engineering}
+\end{titlepage}
+
+% ---------- Declaration ----------
+\clearpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\begin{center}
+    \Huge \textbf{DECLARATION}
+\end{center}
+\vspace{1cm}
+
+I hereby declare that the project titled \textbf{“Time-Shifted Encryption Web Platform: A Secure System for Time-Locked File Access”} submitted in partial fulfillment for the award of the degree of \textbf{Bachelor of Technology} in \textbf{Computer Science and Engineering} at \textbf{SRM University, Andhra Pradesh}, is an original work carried out by me.
+
+This report represents my genuine work and findings under the supervision of \textbf{Dr. Sazzad Ali Biswas}. All sources and references used have been duly acknowledged. I affirm that I have maintained the highest standards of academic integrity and ethics, and have not copied, fabricated, or misrepresented any material, data, or results.
+
+\vspace{1cm}
+
+\noindent
+\textbf{Place:} SRM University, Andhra Pradesh\\
+\textbf{Date:} April 30, 2025\\[1cm]
+\textbf{Name of Student:} Guntur Ridhi\\
+\textbf{Signature:} \underline{\hspace{5cm}}
+
+% ---------- Certificate ----------
+\clearpage
+\begin{center}
+    \Large \textbf{DEPARTMENT OF COMPUTER SCIENCE \& ENGINEERING}\\
+    \vspace{0.2cm}
+    \Large \textbf{SRM UNIVERSITY-AP}\\
+    \vspace{0.2cm}
+    \normalsize Neerukonda, Mangalagiri, Guntur,\\
+    Andhra Pradesh - 522240\\[2cm]
+    
+    \includegraphics[width=4cm]{srm_logo.png}\\[2cm]
+    
+    \Large \textbf{CERTIFICATE}\\[1cm]
+\end{center}
+
+\noindent
+This is to certify that the report entitled \textbf{“Time-Shifted Encryption Web Platform: A Secure System for Time-Locked File Access”} submitted by \textbf{Guntur Ridhi} to the \textbf{SRM University-AP} in partial fulfillment of the requirements for the award of the Degree of \textbf{Bachelor of Technology} in \textbf{Computer Science and Engineering} is a bonafide record of the project work carried out under my supervision and guidance.
+
+\vspace{2cm}
+
+\noindent
+\textbf{Project Guide}\\
+Name: \textbf{Dr. Sazzad Ali Biswas}\\
+Signature: \underline{\hspace{5cm}}
+
+
+
+% ---------- Acknowledgment ----------
+\clearpage
+\begin{center}
+    \Large \textbf{ACKNOWLEDGMENT}
+\end{center}
+\vspace{1cm}
+
+I would like to express my sincere gratitude to everyone who supported and encouraged me during the preparation of this project report titled \textbf{Time-Shifted Encryption Web Platform: A Secure System for Time-Locked File Access}.
+
+I am especially thankful to my guide and supervisor, \textbf{Dr. Sazzad Ali Biswas}, Department of Mathematics, for his valuable suggestions, constant support, and critical inputs throughout the development and documentation of this project.
+
+\vspace{1cm}
+
+\noindent
+\textbf{Guntur Ridhi}\\
+Reg. No. \textbf{AP22110011467}\\
+B.Tech, Department of Computer Science and Engineering\\
+SRM University-AP
+
+% ---------- Abstract ----------
+\clearpage
+\begin{center}
+    \Large \textbf{ABSTRACT}
+\end{center}
+\vspace{1cm}
+
+In today's digital world, the demand for secure and time-controlled data sharing has increased significantly. This project, titled \textbf{Time-Shifted Encryption Web Platform}, aims to create a secure system that enables users to encrypt files such as text, images, PDFs, and videos, allowing decryption only after a specified future time.
+\vspace{1cm}
+By integrating React for the frontend, Flask for the backend, and MySQL for efficient database management, the platform offers an intuitive interface for managing sensitive data with a time-lock feature.
+\vspace{1cm}
+The core methodology involves using AES encryption in Cipher Block Chaining (CBC) mode to provide strong data confidentiality, combined with a time-lock mechanism that restricts decryption access until the intended time. The outcome is a fully functional and reliable web platform that ensures the privacy, integrity, and timely access of user data. This project offers practical applications in secure communication, scheduled information release, and digital rights management.
+
+% ---------- Table of Contents, List of Figures, List of Tables ----------
+\clearpage
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% ---------- Main Chapters ----------
+
+\section{INTRODUCTION}
+
+In today’s digital landscape, protecting sensitive information is a critical necessity. Traditional encryption techniques such as Advanced Encryption Standard (AES) ensure data confidentiality but do not control \textbf{when} the data becomes accessible. In many practical scenarios, controlling the timing of data access is crucial. Examples include examination papers that must remain secret until exam time, legal documents whose disclosure is scheduled, and corporate strategies that should stay confidential until a release date.
+
+Time-shifted encryption addresses this gap by enabling encryption of a file in a way that restricts its decryption until a specified future time. This ensures that even if unauthorized parties obtain the encrypted file, they cannot access its contents before the designated time.
+
+Technically, time-shifted encryption works by:
+\begin{itemize}
+    \item Encrypting a message \( M \) using a symmetric key \( K \) with AES in Cipher Block Chaining (CBC) mode.
+    \item Producing a ciphertext \( C = E_K(M) \).
+    \item Enforcing that decryption \( D_K(C) = M \) is only possible once the system’s current time exceeds the pre-set unlock time \( T_u \).
+\end{itemize}
+
+The encryption method uses \textbf{AES-128}, a standard that offers high security against brute-force attacks, with an effective strength of approximately \( 2^{128} \) possible key combinations~\cite{nist}.
+
+This project involves designing and implementing a web platform that applies time-shifted encryption to secure files uploaded by users. The platform ensures that files remain inaccessible until their respective unlock times, thereby enforcing both \textbf{confidentiality} and \textbf{temporal access control}.
+
+\subsection{Motivation and Background}
+
+Traditional encryption methods focus primarily on protecting the confidentiality of data but lack mechanisms for \textbf{delayed access}. In several fields, premature disclosure of information can lead to significant consequences. For instance:
+\begin{itemize}
+    \item Academic institutions risk exam integrity if papers leak early.
+    \item Businesses can suffer financial losses if confidential plans are revealed ahead of time.
+    \item Courts may require judgments or legal documents to remain confidential until public release dates.
+\end{itemize}
+
+Without time-shifted encryption, even a perfectly encrypted file could be decrypted early if the key is compromised. Adding a time-lock ensures that even with access to the key, the file remains inaccessible until the intended moment.
+
+AES-128 encryption provides a strong foundation for security, ensuring that brute-force attacks are practically infeasible~\cite{hac}. By combining this strong encryption with a time-locking mechanism, our system creates a robust solution for scheduled, secure data access.
+
+\subsection{Objectives and Scope}
+
+\subsubsection{Objectives}
+
+The primary objectives of this project are:
+\begin{itemize}
+    \item \textbf{Implement Strong Encryption:} Apply AES-128-CBC to encrypt user-uploaded text files.
+    \item \textbf{Enforce Time-based Access Control:} Restrict decryption until the system clock reaches the unlock time \( T_u \).
+    \item \textbf{Build a Web-Based Platform:} Develop a user-friendly interface using React.js for the frontend and Flask for the backend.
+    \item \textbf{Ensure Authentication and Authorization:} Secure user sessions and ensure only authorized users access the encryption and decryption services.
+    \item \textbf{Verify Functional Correctness:} Test the system rigorously to ensure accurate encryption, time-based restrictions, and usability.
+\end{itemize}
+
+\textbf{Mathematical Objectives:}
+\begin{itemize}
+    \item Derive AES-CBC encryption working formula for 128-bit data blocks.
+    \item Model and verify the time-lock condition mathematically.
+    \item Analyze computational performance with respect to file size \( n \) and evaluate system latency.
+\end{itemize}
+
+\subsubsection{Scope}
+
+The project scope covers the following areas:
+
+\textbf{Inclusions:}
+\begin{itemize}
+    \item Encryption and decryption of plain text files using AES-128-CBC.
+    \item Time-based restriction mechanism enforced server-side.
+    \item A full-stack web application for file upload, encryption, decryption, and user management.
+    \item Secure handling of encryption keys and time-related metadata.
+\end{itemize}
+
+\textbf{Exclusions:}
+\begin{itemize}
+    \item Support for multiple file types (e.g., images, PDFs) beyond text.
+    \item Integration with cloud storage or distributed systems.
+    \item Mobile application development.
+    \item Use of asymmetric cryptography (e.g., RSA, ECC) for encryption tasks.
+\end{itemize}
+
+\textbf{Constraints:}
+\begin{itemize}
+    \item Limitation on the maximum file size handled due to server capacity.
+    \item Decryption strictly tied to server clock synchronization to prevent tampering.
+\end{itemize}
+
+
+\section{CRYPTOGRAPHIC FOUNDATIONS}\label{sec:crypto}
+
+This section provides the mathematical and theoretical basis for the cryptographic mechanisms used in the project, specifically focusing on symmetric encryption via AES-CBC mode and secure key management strategies.
+
+\subsection{AES-CBC Encryption}
+
+\subsubsection{Theoretical Overview}
+
+The Advanced Encryption Standard (AES) is a symmetric block cipher standardized by NIST, designed to secure sensitive data by operating on fixed-size 128-bit blocks. AES encrypts data through multiple transformation rounds: SubBytes (non-linear substitution), ShiftRows (row-wise permutation), MixColumns (mixing operation), and AddRoundKey (key addition)~\cite{stallings2017}.
+
+Cipher Block Chaining (CBC) mode enhances the security of block ciphers by introducing inter-block dependencies, ensuring that identical plaintext blocks encrypt to different ciphertext blocks when a different Initialization Vector (IV) is used~\cite{nist80038a}.
+
+\subsubsection{Mathematical Formalization}
+
+Let $M$ be the plaintext message, divided into blocks:
+\[
+M = P_1 \parallel P_2 \parallel \cdots \parallel P_n,
+\]
+where each $P_i$ is a 128-bit block after padding.
+
+Generate a random encryption key $K \in \{0,1\}^{128}$ and a random Initialization Vector $IV \in \{0,1\}^{128}$. Then, encryption proceeds as:
+
+\[
+C_0 = E_K(P_0 \oplus IV),
+\]
+\[
+C_i = E_K(P_i \oplus C_{i-1}), \quad \text{for } i > 0,
+\]
+where $E_K(\cdot)$ denotes AES encryption under key $K$, and $\oplus$ denotes bitwise XOR.
+
+The final ciphertext output is $(IV, C_0, C_1, \dots, C_n)$, with $IV$ transmitted/stored alongside ciphertext to allow correct decryption.
+
+\subsubsection{Security Properties}
+
+CBC mode ensures that each ciphertext block depends on all prior plaintext blocks. This chaining structure protects against block reordering and replay attacks. A randomly generated IV ensures that encrypting identical plaintexts results in distinct ciphertexts, with a probability of collision negligible (approximately $2^{-128}$)~\cite{menezes1996}.
+
+\subsubsection{Decryption Proof}
+
+Correct decryption recovers $P_i$ using:
+
+\[
+P_i = D_K(C_i) \oplus C_{i-1},
+\]
+where $D_K(\cdot)$ denotes AES decryption. The correctness follows since AES decryption exactly reverses encryption, i.e., $D_K(E_K(X)) = X$.
+
+\subsubsection{CBC Mode Diagram}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{cbc_model.png}
+  \caption{AES-CBC Encryption Process: Each plaintext block is XORed with the previous ciphertext block and then encrypted.}
+  \label{fig:cbc_encryption}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{cbc_2.png}
+  \caption{AES-CBC Decryption Process: Each ciphertext block is decrypted and XORed with the previous ciphertext block to retrieve plaintext.}
+  \label{fig:cbc_decryption}
+\end{figure}
+
+
+\subsection{Key Management}
+
+\subsubsection{Theoretical Overview}
+
+Proper key management is essential to ensure that the confidentiality provided by encryption is not compromised. In this system, session-specific keys are generated randomly, stored securely, and linked to user-specified unlock times.
+
+\subsubsection{Formalization}
+
+During each upload session:
+\begin{itemize}
+    \item A random 128-bit session key $K$ is generated using a cryptographically secure random number generator, such as \texttt{os.urandom(16)}.
+    \item An Initialization Vector $IV$ is generated randomly to ensure encryption uniqueness.
+    \item The tuple $(C, K, IV, T_u)$ is prepared, where $C$ is the ciphertext, $K$ is the encryption key, $IV$ is the initialization vector, and $T_u$ is the Unix timestamp when decryption is permitted.
+    \item To enhance security, $K$ is encrypted using a master server key $K_m$:
+    \[
+    K' = E_{K_m}(K),
+    \]
+    and only the encrypted $K'$ is stored in the database alongside $C$, $IV$, and $T_u$.
+\end{itemize}
+
+\subsubsection{Security Properties}
+
+- The master key $K_m$ remains confidential on the server, minimizing the risk of session key exposure even if the database is compromised.
+- AES-128 provides a security margin of $2^{128}$ operations against brute-force attacks, which is computationally infeasible with current technology~\cite{stallings2017}.
+
+\subsubsection{Link to Time-Locking}
+
+While AES-CBC ensures that uploaded file contents remain confidential, the enforcement of timed release is achieved via a time-locking mechanism (see Section~\ref{sec:timelock}). The decryption key $K$ is inaccessible until the user-specified future time $T_u$, thus ensuring both confidentiality and timed access control~\cite{timelockpaper}.
+
+\section{TIME-LOCK MECHANISM}\label{sec:timelock}
+
+\subsection{Time Comparison Logic}
+
+The time-lock mechanism ensures that decryption is permitted only after a specified unlock time $T_u$. Formally, let:
+
+\begin{itemize}
+\item $T_c$ = Current server time, obtained securely via \texttt{datetime.now()}.
+\item $T_u \in \mathbb{Z}$ = Unlock time set at encryption.
+\end{itemize}
+
+
+Decryption is allowed if and only if:
+
+$$
+T_c \geq T_u
+$$
+
+This condition is enforced strictly server-side to prevent client-side manipulation. The server compares the current time against the unlock time before granting access to decryption keys or operations.
+
+Security against premature decryption relies on:
+\begin{itemize}
+\item Correct server clock synchronization (e.g., using NTP).
+\item Strong access control on decryption APIs to prevent bypassing the time-lock.
+\item Attackers attempting to bypass the time-lock by brute-forcing the AES key would require approximately $2^{128}$ operations, making such attacks computationally infeasible~\cite{hac}.
+\end{itemize}
+
+\subsection{Security Analysis}
+
+The platform’s security is composed of multiple layers:
+
+\begin{itemize}
+    \item \textbf{Confidentiality:}
+
+AES-128 encryption ensures the probability of successful brute-force key recovery is approximately $2^{-128}$~\cite{hac}. This level of security is currently considered unbreakable by practical standards.
+\end{itemize}
+\begin{itemize}
+    \item \textbf{Integrity:}
+     Files are validated upon decryption using a SHA-256 checksum. The probability of two different files producing the same checksum (collision probability) is approximately $2^{-128}$, assuming random pre-images~\cite{stallings2017}.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Server Access Control:}
+    Keys and unlock metadata are stored securely on the server. Strong authentication and authorization mechanisms prevent unauthorized retrieval of keys, in line with best practices outlined in~\cite{nist80038a}.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Resistance to Time Spoofing:}
+    Since the time check is server-side and clients have no control over server time, attackers cannot manipulate the current time value to prematurely decrypt files. Ensuring that the server clock is synchronized and protected from tampering further strengthens this guarantee.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Key Storage Risks:}
+    While encryption offers strong guarantees, database breaches could expose stored keys and metadata. Mitigations include:
+    \begin{description}
+        \item[--] Encrypting stored keys with an additional server-side secret.
+        \item[--] Restricting database access via firewalls and network segmentation.
+        \item[--] Regular auditing and intrusion detection.
+    \end{description}
+\end{itemize}
+
+
+\begin{itemize}
+    \item \textbf{System Integration:}
+    The time-lock mechanism integrates tightly with the encryption process (Section~\ref{sec:crypto}) and is implemented through server-side Flask endpoints (Section~\ref{sec:system}). Together, they enforce scheduled, secure access to the encrypted content.
+\end{itemize}
+
+\section{SYSTEM DESIGN AND IMPLEMENTATION}
+
+\subsection{Frontend (React.js)}
+
+The frontend of the Time-Shifted Encryption platform is developed using \textbf{React.js}. It provides an interactive interface that allows users to register, log in, upload files for time-based encryption, and decrypt files after the unlock time. The user interface is designed with a focus on simplicity, security, and responsiveness.
+
+\subsubsection{Key Features}
+
+\begin{itemize}
+    \item User Registration and Login forms.
+    \item File Upload form with unlock time input.
+    \item Dashboard to view uploaded files.
+    \item Notifications for successful uploads and errors.
+    \item Decryption form to download decrypted files after unlock time.
+\end{itemize}
+
+\subsubsection{Frontend Libraries Used}
+
+\begin{itemize}
+    \item \texttt{axios} - for making HTTP requests to the Flask backend.
+    \item \texttt{react-router-dom} - for navigation between pages.
+    \item \texttt{moment.js} - for handling dates and times.
+\end{itemize}
+
+\subsubsection{Sample Frontend Code}
+
+React component for uploading a file:
+
+\begin{verbatim}
+import React, { useState } from 'react';
+import axios from 'axios';
+
+function UploadFile() {
+    const [file, setFile] = useState(null);
+    const [unlockTime, setUnlockTime] = useState('');
+
+    const handleUpload = async () => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('unlock_time', unlockTime);
+
+        try {
+            const response = await axios.post('/upload', formData);
+            alert('File uploaded successfully!');
+        } catch (error) {
+            alert('Error uploading file.');
+        }
+    };
+
+    return (
+        <div>
+            <h2>Upload File</h2>
+            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <input type="datetime-local" value={unlockTime} onChange={(e) => setUnlockTime(e.target.value)} />
+            <button onClick={handleUpload}>Upload</button>
+        </div>
+    );
+}
+
+export default UploadFile;
+\end{verbatim}
+
+\subsection{Backend (Flask)}\label{sec:system}
+
+The backend is developed using \textbf{Flask (Python)} and connects to a \textbf{MySQL} database hosted on XAMPP. It provides secure APIs for user management, file uploads, encryption, and timed decryption.
+
+\subsubsection{Database Configuration}
+
+\begin{itemize}
+    \item \textbf{Database}: \texttt{time\_lock}
+    \item \textbf{Tables}: \texttt{users}, \texttt{files}
+\end{itemize}
+
+\subsubsection{Backend Libraries Used}
+
+\begin{itemize}
+    \item \texttt{mysql-connector-python} - to interact with MySQL database.
+    \item \texttt{Flask} - to create REST APIs.
+    \item \texttt{pycryptodome} - for AES encryption and decryption.
+\end{itemize}
+
+\subsubsection{Sample Backend Code (Upload API)}
+
+\begin{verbatim}
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    file = request.files['file']
+    unlock_time = request.form['unlock_time']
+
+    if file and unlock_time:
+        content = file.read()
+        encrypted_content = encrypt_content(content)
+        filename = secure_filename(file.filename)
+
+        cursor.execute("INSERT INTO files (user_id, file_name, encrypted_data, unlock_time) VALUES (%s, %s, %s, %s)",
+                       (current_user_id, filename, encrypted_content, unlock_time))
+        db.commit()
+
+        return jsonify({"message": "File uploaded successfully!"})
+    return jsonify({"error": "Invalid upload."})
+\end{verbatim}
+
+\subsection{API Endpoints and File Handling}
+
+The backend exposes the following API endpoints for frontend interaction:
+
+\subsubsection{Authentication}
+
+\begin{itemize}
+    \item \texttt{POST /register}: Register a new user.
+    \item \texttt{POST /login}: Authenticate and log in an existing user.
+\end{itemize}
+
+\subsubsection{File Management}
+
+\begin{itemize}
+    \item \texttt{POST /upload}: Upload and encrypt a file with a specified unlock time.
+    \item \texttt{POST /decrypt}: Decrypt and download a file once the unlock time has passed.
+\end{itemize}
+
+\subsubsection{File Handling Process}
+
+\begin{enumerate}
+    \item User selects a file and sets an unlock time via the frontend.
+    \item File content is read and encrypted using AES encryption on the server.
+    \item Encrypted file data along with metadata (filename, unlock time) is stored in the MySQL database.
+    \item Upon decryption request, server checks if current time $\geq$ unlock time.
+    \item If valid, file is decrypted and sent back to the user; otherwise, an error message is returned.
+\end{enumerate}
+\subsection{System Flow Diagram}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{flow_diagram.png}
+    \caption{System Flow Diagram showing interaction between User, Frontend, Backend, Encryption, and Database.}
+    \label{fig:system-flow-diagram}
+\end{figure}
+
+
+
+
+\section{EVALUTION AND FUTURE WORK}
+
+\subsection{Testing and Results}
+Testing was performed at various stages of the system to ensure functionality, reliability, and accuracy. 
+Key tests conducted include:
+
+\begin{itemize}
+    \item \textbf{Frontend Testing:} Verified that user inputs, file selection, and UI updates work correctly across different browsers.
+    \item \textbf{API Testing:} Used tools like Postman to test Flask API endpoints for file upload, encryption, storage, and retrieval.
+    \item \textbf{Database Testing:} Ensured encrypted files and metadata were correctly stored and retrieved from the MySQL database.
+    \item \textbf{Decryption Testing:} Checked that files could not be decrypted before the specified unlock time, validating time-locked encryption.
+\end{itemize}
+
+The system successfully passed all major test cases, and files were encrypted, uploaded, stored, and decrypted according to the designed time constraints.
+
+\subsection{Limitations}
+While the system achieves its primary objectives, certain limitations exist:
+
+\begin{itemize}
+    \item \textbf{File Size Restriction:} Very large files ( less than 50 MB) may cause performance issues due to memory limitations during encryption and transmission.
+    \item \textbf{Fixed Unlock Time:} Once a time-lock is set, it cannot be modified afterward, limiting flexibility for the users.
+    \item \textbf{Limited Error Handling:} The frontend displays basic error messages, but detailed server-side errors are not fully exposed to the user.
+    \item \textbf{Security Scope:} While AES provides strong encryption, additional layers like file integrity checking (e.g., digital signatures) are not yet implemented.
+\end{itemize}
+
+\subsection{Future Enhancement}
+Future improvements and expansions to the system may include:
+
+\begin{itemize}
+    \item \textbf{Progress Indicators:} Implement upload/download progress bars for better user experience.
+    \item \textbf{Email Notifications:} Notify users when their file becomes available for decryption.
+    \item \textbf{Multi-file Support:} Enable batch uploading and downloading of multiple encrypted files at once.
+    \item \textbf{Extend to Cloud Storage:} Allow users to save encrypted files directly to cloud platforms like Google Drive or Dropbox.
+    \item \textbf{Mobile Application:} Develop a mobile app version to allow real-time file encryption/decryption on smartphones.
+    \item \textbf{Enhance Security:} Introduce additional layers like RSA encryption, digital signatures, or blockchain-based timestamping for extra security.
+\end{itemize}
+
+\section{CONCLUSION}
+The project successfully demonstrated a secure and efficient method to manage timed file access. It combined cryptographic strength and practical web development technologies to build a robust system. The future scope includes integration with blockchain for enhanced transparency and decentralized control.
+
+\clearpage
+
+\section{LIST OF IMAGES AND TABLES}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{upload_screenshot.png}
+  \caption{Upload Page: File selection and unlock-time input.}
+  \label{fig:upload_page}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{db_storage.png}
+  \caption{Database Storage: Encrypted record in MySQL ‘files’ table.}
+  \label{fig:db_storage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{decryption_success.png}
+  \caption{Decryption Success: File accessible after unlock time.}
+  \label{fig:decryption_success}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{api_encrypt.png}
+  \caption{API Test: Upload endpoint verified in Postman.}
+  \label{fig:api_test}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{api_decrypt.png}
+  \caption{API Test: Decrypt endpoint verified in Postman.}
+  \label{fig:api_test}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|l|l|c|}
+    \hline
+    \textbf{Test ID} & \textbf{Description} & \textbf{Expected} & \textbf{Status} \\ \hline
+    T1 & Upload with unlock time   & Success & Pass \\ \hline
+    T2 & Upload without unlock time & Error   & Pass \\ \hline
+    T3 & Decrypt before unlock time & Denied  & Pass \\ \hline
+    T4 & Decrypt after unlock time  & Success & Pass \\ \hline
+    T5 & DB store post-upload       & Stored  & Pass \\ \hline
+  \end{tabular}
+  \caption{Summary of Test Cases and Outcomes.}
+  \label{tab:test_summary}
+\end{table}
+
+\clearpage
+
+\begin{thebibliography}{9}
+
+\bibitem{hac} 
+Alfred J. Menezes, Paul C. van Oorschot, and Scott A. Vanstone. \textit{Handbook of Applied Cryptography}. CRC Press, 1996. Chapter 7, Page 230.
+
+\bibitem{nist}
+National Institute of Standards and Technology (NIST). \textit{Recommendation for Block Cipher Modes of Operation: Methods and Techniques}, NIST Special Publication 800-38A, Section 5.2.1, Page 25.
+
+\bibitem{stallings2017}
+W. Stallings, \textit{Cryptography and Network Security: Principles and Practice}, 7th Edition, Pearson, 2017.
+
+\bibitem{menezes1996}
+A. Menezes, P. van Oorschot, and S. Vanstone, \textit{Handbook of Applied Cryptography}, CRC Press, 1996.
+
+\bibitem{nist80038a}
+National Institute of Standards and Technology (NIST), \textit{Recommendation for Block Cipher Modes of Operation: Methods and Techniques}, Special Publication 800-38A, 2001.
+
+\bibitem{timelockpaper}
+Placeholder Author, \textit{Title of Time-Lock Paper or System}, Journal/Conference Name, Year.
+
+\end{thebibliography}
+
+\end{document}
